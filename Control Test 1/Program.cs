@@ -1,63 +1,76 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Control_Test_1
+namespace ConsoleApplication1
 {
-    enum Cities
-    {
-        
-    }
-
+    // описание структуры
     struct City
     {
-        public string NameCity;
-        public int PopulationCity;
-        public int AreaCity;
+        public string Name;
+        public int Population;
+        public int Area;
+        public float Destiny;
     }
     class Program
     {
         static void Main(string[] args)
         {
-            Console.Write("Input cities,their population and area:");
-            string InputCities = Console.ReadLine();
-            
-            //Input cities
-            Console.Write(InputCities);
-            Console.WriteLine("=======================");
-            
+            // ввод исходны данных
+            Console.WriteLine("Input cities,their population and areas:");
+            string Inputcities = Console.ReadLine();
 
-            for (int i = 0; i < InputCities.Length; i++)
+            int numcity = 0;
+            for (int i = 0; i < Inputcities.Length; i++)
             {
-                if (i == '=')
+                if (Inputcities[i] == ';')
                 {
-                    Console.Write("Name is", InputCities[i]);
+                    numcity++;
                 }
 
-                if (i == ',')
-                {
-                    Console.Write("Population is:", InputCities[i]);
-                }
-                { 
-                if (i == ';') Console.Write("Area is:", InputCities[i]);
-                }
-                Console.Write(InputCities[i]);
             }
 
+            City[] city = new City[numcity];
 
-            City[] city = new City[]
+            string s = "";
+            for (int i = 0; i < Inputcities.Length; i++)
             {
-                
-            };
+                if(Inputcities[i]=='=')
+                {
+                    city[i].Name = s;
+                }
+                if (Inputcities[i] == ',')
+                {
+                    city[i].Population = int.Parse(s);
+                }
+                if (Inputcities[i] == ';')
+                {
+                    city[i].Area = int.Parse(s);
+                }
+            }
 
-            
+            City Pop = new City();
+            City Name = new City();
+            for (int i = 0; i < city.Length; i++)
+            {
+                city[i].Destiny = city[i].Area / city[i].Population;
 
-            Console.WriteLine("Most populated:");
-            Console.WriteLine("Longest name");
-            Console.WriteLine("Density");
+                if (city[i].Population > Pop.Population)
+                {
+                    Pop.Population = city[i].Population;
+                }
+                if (city[i].Name.Length > Name.Name)
+                {
+                    Name.Name= city[i].Name.Length;
+                }
+            }
 
+            Console.WriteLine("The Most Populated City:",Pop.Name+" "+Pop.Population);
+            Console.WriteLine("The Longest Name:",Pop.Name);
+            Console.WriteLine("The Destiny");
         }
     }
 }
+
